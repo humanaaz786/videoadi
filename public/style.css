@@ -108,9 +108,6 @@
   padding: 1rem;
   background-color: var(--main-dark);
 }
-.background_red{
-  background-color: #f6484a;
-}
 
 video {
   height: 300px;
@@ -121,6 +118,10 @@ video {
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
+}
+
+.background_red {
+  background-color: #f6484a;
 }
 
 @media (max-width: 700px) {
