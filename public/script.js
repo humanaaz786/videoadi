@@ -21,8 +21,26 @@ navigator.mediaDevices
     .then((stream) => {
         myStream = stream;
         addVideoStream(myVideo, stream);
-    })
 
+        socket.on("user-connected",(userId)=>{
+            connectToNewuser(userId,stream);
+        });
+
+        peer.on("call",(call)=>{
+            call.answer(stream);
+            const video=document.createElement("video");
+            call.on("stream",(userVideoStream)=>{
+                addVideoStream(video,userVideoStream);
+            });
+        })
+    })
+function connectToNewuser(userId,stream){
+    const call=peer.call(userId,stream);
+    const video=document.createElement("video");
+    call.on("stream",(userVideoStream)=>{
+        addEventListener(video,userVideoStream);
+    })
+}
 function addVideoStream(video, stream) {
     video.srcObject = stream;
     video.addEventListener("loadedmetadata", () => {
